@@ -23,5 +23,6 @@
 !*.js
 # ...even if they are in subdirectories
 !*/
+!.vscode/*
 !*.py
 clangd_14.0.1

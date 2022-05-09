@@ -1,0 +1,13 @@
+{
+    "configurations": [
+        {
+            "defines": [
+                "LOCAL",
+                "zz",
+                "mainfuc"
+            ],
+            "name": "Linux"
+        }
+    ],
+    "version": 4
+}
