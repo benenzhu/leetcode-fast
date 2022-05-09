@@ -8,4 +8,4 @@
 
 加速编译
 
-``
+`cd bits && g++ -D zz -D mainfuc -H -std=c++17 stdc++.h`
