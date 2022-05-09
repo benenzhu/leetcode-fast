@@ -23,4 +23,5 @@
 !*.js
 # ...even if they are in subdirectories
 !*/
+!*.py
 clangd_14.0.1
