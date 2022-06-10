@@ -4,8 +4,18 @@ import sys
 
 with open(sys.argv[1]) as w:
     a = w.read()
+with open(sys.argv[1]) as w:
+    lines = w.readlines()
 if(a.find('mainfuc')!=-1):
-    exit(0)
+    if a.count("include") >= 2:
+        with open(sys.argv[1], "w") as f:
+            for i in lines:
+                if "include" in i and "bits/stdc++.h" not in i:
+                    continue 
+                f.write(i)
+        exit(0)
+    else:
+        exit(0)
 aline = a.split("\n") # 读出来以后分行
 for i in range(len(aline)):
     if("public:" in aline[i]):
@@ -26,6 +36,7 @@ for i in range(len(ss)):
 funcpos = ss.find("(")
 a = ss[funcpos + 1:ss.find(")")].split(',')  # 这个是每一个参数是什么
 ins = []
+print(ss)
 out = ss[:outpos] # 返回值
 for i in a:
     line = i.strip().split(' ')[0] # 每一个类型
@@ -54,35 +65,36 @@ indic = {
 "long long":["parseInteger","serializeInteger"],
 ## todo
 # 链表
-"ListNode*":["parseListNode","serializeListNode"],
+"ListNode":["parseListNode","serializeListNode"],
 "vector<ListNode*>":["parseListNodeArr","serializeListNodeArr"],
 # 字符串
 "string":["parseString","serializeString"],
 "vector<string>":["parseStringArr","serializeStringArr"],
 "vector<vector<string>>":["parseStringArrArr","serializeStringArrArr"],
 #
+"Node":["parseNode","serializeNode"], #// todo
 "TreeNode":["parseTreeNode","serializeTreeNode"],
-"vector<TreeNode*":["parseTreeNodeArr","serializeTreeNodeArr"],
+"vector<TreeNode *>":["parseTreeNodeArr","serializeTreeNodeArr"],
 }
-outdic = {
-# "bool":"serializeBool",
-"char":"serializeChar",
-"vector<char>":"serializeCharArr",
-"vector<vector<char>>":"serializeCharArrArr",
-"double":"serializeFloat",
-"int":"serializeInteger",
-"long long":"serializeInteger",
-# "long":"serializeInteger",
-"vector<int>":"serializeIntegerArr",
-"vector<vector<int>>":"serializeIntegerArrArr",
-"ListNode*":"serializeListNode",
-"vector<ListNode*>":"serializeListNodeArr",
-"string":"serializeString",
-"vector<string>":"serializeStringArr",
-"vector<vector<string>>":"serializeStringArrArr",
-"TreeNode*":"serializeTreeNode",
-"vector<TreeNode*>":"serializeTreeNodeArr"
-}
+# outdic = {
+# # "bool":"serializeBool",
+# "char":"serializeChar",
+# "vector<char>":"serializeCharArr",
+# "vector<vector<char>>":"serializeCharArrArr",
+# "double":"serializeFloat",
+# "int":"serializeInteger",
+# "long long":"serializeInteger",
+# # "long":"serializeInteger",
+# "vector<int>":"serializeIntegerArr",
+# "vector<vector<int>>":"serializeIntegerArrArr",
+# "ListNode*":"serializeListNode",
+# "vector<ListNode*>":"serializeListNodeArr",
+# "string":"serializeString",
+# "vector<string>":"serializeStringArr",
+# "vector<vector<string>>":"serializeStringArrArr",
+# "TreeNode*":"serializeTreeNode",
+# "vector<TreeNode*>":"serializeTreeNodeArr"
+# }
 s = """
 // @lc code=end
 
@@ -133,12 +145,13 @@ using namespace std;
 #define per(i, n, j)    for(int i=(n)-1;i>=(j);--i)
 #define sz(a)         ((int)a.size())
 
+void print() { puts(""); }
+
 #ifdef zz
 #define dea2(a,n,m)    rep(_i, 0, n) { rep(_j, 0, m) O(a[_i][_j]); puts(""); };puts("")
 #define dea(a,n)	       rep(_i,0,n)O(a[_i]);puts("")
 #define O(i)            printf("%d ",i)
 #define On(i)           printf("%d\\n",i)
-void print() { puts(""); }
 template<typename T, typename... Types>
 void print(const T& first, const Types&... args) {
     cout << first << " ";
@@ -156,7 +169,8 @@ inline void print(const T& first, const Types&... args){
 }
 #endif
 
-const int dx[] = { 1,-1,0,0 }, dy[] = { 0,0,1,-1 };
+#define PII pair<int, int>
+vector<vector<int>> dir = {{0,1},{1,0},{0,-1},{-1,0}}; // 右下左上 顺时针
 #define ULL unsigned long long
 const int inf = 0x3f3f3f3f;
 #define VI vector<int>

@@ -163,6 +163,25 @@ struct TreeNode {
     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
 };
+class Node {
+  public:
+    int val;
+    vector<Node *> children;
+
+    Node() {}
+
+    Node(int _val) {
+        val = _val;
+    }
+
+    Node(int _val, vector<Node *> _children) {
+        val = _val;
+        children = _children;
+    }
+};
+string serializeNode(Node *root) {
+    return "todo undefined";
+}
 void split(std::string param, char seg, std::vector<std::string> &arr) {
     std::string temp = "";
     for (auto it = param.begin(); it != param.end(); it++) {
@@ -174,6 +193,21 @@ void split(std::string param, char seg, std::vector<std::string> &arr) {
         }
     }
     arr.push_back(temp);
+}
+Node *parseNode(string param) {
+    int len = param.length();
+    if (len <= 2) {
+        return nullptr;
+    }
+    std::vector<std::string> nodeData;
+    split(param.substr(1, len - 2), ',', nodeData);
+    if (nodeData.size() == 0) {
+        return nullptr;
+    }
+    int cnt = 0; // todo
+    // for (auto i : nodeData) print(++cnt, i);
+
+    return nullptr;
 }
 int parseInteger(std::string param) {
     return atoi(param.data());

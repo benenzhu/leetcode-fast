@@ -91,12 +91,14 @@
 		"variant": "cpp"
 	},
 	"code-runner.executorMap": {
-		"cpp": "clear &&python3 a.py $fileName && time g++ -D zz -D mainfuc -std=c++17 $fileName -o ./a &&echo &&echo '--------'&& ./a < $fileName &&python3 copys.py $fileName && code buffer.txt && echo 'COPYED, just go'",
+		"cpp": "clear &&python3 a.py $fileName && time g++ -D zz -D mainfuc -std=c++17 -H $fileName -o ./a &&echo &&echo '--------'&& ./a < $fileName &&python3 copys.py $fileName && code buffer.txt && echo 'COPYED, just go'",
+		// "cpp": "time g++ $fileName && ./a.out",
 	},
 	"code-runner.executorMapByFileExtension": {
 		".h": "$filename"
 	},
 	"editor.formatOnSave": true,
 	"C_Cpp.errorSquiggles": "Disabled",
-	"breadcrumbs.showTypeParameters": true
+	"breadcrumbs.showTypeParameters": true,
+	"editor.inlayHints.enabled": "off"
 }
